@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temas de Aprendizaje</title>
+</head>
+<body>
+    <h1>Temas de Aprendizaje</h1>
+    
+    <!-- Enlace al controlador: GET /new-topic (Formulario nuevo tema) -->
+    <p><a href="/new-topic">Nuevo Tema</a></p>
+
+    <h2>Lista de Temas</h2>
+    <hr>
+    <% if (topics.length === 0) { %>
+        <p>No hay temas aún.</p>
+    <% } else { %>
+        <% topics.forEach(function(topic) { %>
+            <div>
+                <h3><%= topic.title %></h3>
+
+                <p>
+                    Votos: <strong><%= topic.votes %></strong> | 
+                    Enlaces: <%= topic.link_count %> |
+                    Creado: <%= new Date(topic.created_at).toLocaleDateString('es-ES') %>
+                </p>
+                
+                <p>
+                    <!-- Formulario conectado al controlador: POST /vote-topic/:id (Votar tema) -->
+                    <form action="/vote-topic/<%= topic.id %>" method="POST" style="display: inline;">
+                        <button type="submit">👍 Votar</button>
+                    </form>
+                    
+                    <!-- Enlace al controlador: GET /topic/:id (Ver tema específico) -->
+                    <a href="/topic/<%= topic.id %>">[Ver Enlaces]</a>
+                    <!-- Enlace al controlador: GET /edit-topic/:id (Formulario editar tema) -->
+                    <a href="/edit-topic/<%= topic.id %>">[Editar Tema]</a>
+                    
+                    <!-- Formulario conectado al controlador: POST /delete-topic/:id (Eliminar tema) -->
+                    <form action="/delete-topic/<%= topic.id %>" method="POST" style="display: inline;">
+                        <button type="submit" onclick="return confirm('¿Eliminar tema?')">Eliminar</button>
+                    </form>
+                </p>
+            </div>
+            <hr>
+        <% }); %>
+    <% } %>
+</body>
+</html>

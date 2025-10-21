@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= topic.title %> - Tema de Aprendizaje</title>
+</head>
+<body>
+    <!-- Enlace al controlador: GET / (Página principal - lista de temas) -->
+    <p><a href="/">&lt; Volver al inicio</a></p>
+
+    <h1><%= topic.title %></h1>
+
+    <hr>
+
+    <h2>Enlaces de Aprendizaje (<%= topic.links.length %>)</h2>
+    
+    <!-- Enlace al controlador: GET /new-link/:topicId (Formulario nuevo enlace) -->
+    <p><a href="/new-link/<%= topic.id %>">[Agregar Enlace]</a></p>
+
+    <% if (topic.links.length === 0) { %>
+        <p>No hay enlaces aún.</p>
+    <% } else { %>
+        <% topic.links.forEach(function(link) { %>
+            <div>
+                <hr>
+                <h3><%= link.title %></h3>
+                
+                <p><strong>URL:</strong> <a href="<%= link.url %>" target="_blank"><%= link.url %></a></p>
+                
+                <% if (link.description) { %>
+                    <p><%= link.description %></p>
+                <% } %>
+
+                <p>
+                    Votos: <strong><%= link.votes %></strong>
+                </p>
+                <p>
+                    <!-- Formulario conectado al controlador: POST /vote-link/:id (Votar enlace) -->
+                    <form action="/vote-link/<%= link.id %>" method="POST" style="display: inline;">
+                        <button type="submit">👍 Votar</button>
+                    </form>
+                    
+                    <!-- Formulario conectado al controlador: POST /delete-link/:id (Eliminar enlace) -->
+                    <form action="/delete-link/<%= link.id %>" method="POST" style="display: inline;">
+                        <button type="submit" onclick="return confirm('¿Eliminar enlace?')">Eliminar</button>
+                    </form>
+                    
+                    <!-- Enlace al controlador: GET /edit-link/:linkId (Formulario editar enlace) -->
+                    <a href="/edit-link/<%= link.id %>">[Editar]</a>
+                </p>
+            </div>
+        <% }); %>
+    <% } %>
+</body>
+</html>

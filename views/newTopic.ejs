@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Tema</title>
+</head>
+<body>
+    <!-- Enlace al controlador: GET / (Página principal - lista de temas) -->
+    <p><a href="/">&lt; Volver al inicio</a></p>
+
+    <h1>Crear Nuevo Tema</h1>
+
+    <!-- Formulario conectado al controlador: POST /new-topic (Crear nuevo tema) -->
+    <form action="/new-topic" method="POST">
+        <p>
+            <label for="title">Título del Tema:</label><br>
+            <input type="text" id="title" name="title" required style="width: 300px;">
+        </p>
+        <p>
+            <button type="submit">Crear Tema</button>
+            <!-- Enlace al controlador: GET / (Página principal - lista de temas) -->
+            <a href="/">Cancelar</a>
+        </p>
+    </form>
+</body>
+</html>

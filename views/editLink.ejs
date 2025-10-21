@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Enlace</title>
+</head>
+<body>
+    <!-- Enlace al controlador: GET /topic/:id (Ver tema específico) -->
+    <p><a href="/topic/<%= link.topic_id %>">&lt; Volver al tema</a></p>
+
+    <h1>Editar Enlace</h1>
+
+    <!-- Formulario conectado al controlador: POST /edit-link/:linkId (Actualizar enlace) -->
+    <form action="/edit-link/<%= link.id %>" method="POST">
+        <p>
+            <label for="title">Título del Enlace:</label><br>
+            <input type="text" id="title" name="title" value="<%= link.title %>" required style="width: 300px;">
+        </p>
+
+        <p>
+            <label for="url">URL:</label><br>
+            <input type="url" id="url" name="url" value="<%= link.url %>" required style="width: 300px;" placeholder="https://ejemplo.com">
+        </p>
+        <p>
+            <button type="submit">Actualizar Enlace</button>
+            <!-- Enlace al controlador: GET /topic/:id (Ver tema específico) -->
+            <a href="/topic/<%= link.topic_id %>">Cancelar</a>
+        </p>
+    </form>
+</body>
+</html>

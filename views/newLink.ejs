@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Enlace</title>
+</head>
+<body>
+    <!-- Enlace al controlador: GET /topic/:id (Ver tema específico) -->
+    <p><a href="/topic/<%= topic.id %>">&lt; Volver a '<%= topic.title %>'</a></p>
+
+    <h1>Agregar Enlace a "<%= topic.title %>"</h1>
+
+    <!-- Formulario conectado al controlador: POST /new-link/:topicId (Crear enlace) -->
+    <form action="/new-link/<%= topic.id %>" method="POST">
+        <p>
+            <label for="title">Título del Enlace:</label><br>
+            <input type="text" id="title" name="title" required style="width: 300px;">
+        </p>
+
+        <p>
+            <label for="url">URL:</label><br>
+            <input type="url" id="url" name="url" required style="width: 300px;" placeholder="https://ejemplo.com">
+        </p>
+        <p>
+            <button type="submit">Agregar Enlace</button>
+            <!-- Enlace al controlador: GET /topic/:id (Ver tema específico) -->
+            <a href="/topic/<%= topic.id %>">Cancelar</a>
+        </p>
+    </form>
+</body>
+</html>
