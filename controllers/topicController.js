@@ -1,9 +1,9 @@
-// Importamos Express para crear el router y manejar rutas HTTP
+// Importamos Express para crear el router y manejar rutas HTTP 
+// Importamos el modelo LearningTopic 
 const express = require('express');
-// Importamos el modelo LearningTopic que contiene toda la lógica de base de datos
 const LearningTopic = require('../models/LearningTopic');
 
-// Creamos un router de Express para organizar todas las rutas relacionadas con temas
+// Creamos un router de Express para organizar todas las rutas
 const router = express.Router();
 
 // RUTA PRINCIPAL: Mostrar todos los temas en la página de inicio, Obtenemos los temas desde la base de datos
@@ -32,7 +32,7 @@ router.get('/new-topic', (req, res) => {
 // POST funciona con datos del formulario extrayendo el título desde req.body
 router.post('/new-topic', (req, res) => {
     const { title } = req.body;
-    
+    console.log(req.body)
     if (title && title.trim() !== '') {
         LearningTopic.createTopic(title.trim());
     }
@@ -77,6 +77,7 @@ router.post('/vote-topic/:id', (req, res) => {
 // GET funciona con parámetro de ruta (:topicId) extrayendo el ID del tema desde req.params.topicId
 router.get('/new-link/:topicId', (req, res) => {
     const topic = LearningTopic.findTopicById(req.params.topicId);
+    
     if (!topic) return res.status(404).send('Tema no encontrado');
     res.render('newLink', { topic: topic});
 });
@@ -85,6 +86,8 @@ router.get('/new-link/:topicId', (req, res) => {
 // POST funciona con parámetro de ruta (:topicId) y datos del formulario, combinando ID desde req.params.topicId con título y URL desde req.body
 router.post('/new-link/:topicId', (req, res) => {
     const { title, url } = req.body;
+    console.log(req.body)
+    console.log(title)
     if (title && title.trim()!=='' && url.trim()!==''){
         LearningTopic.createLink(title.trim(), url.trim(), req.params.topicId);
     }

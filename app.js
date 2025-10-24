@@ -1,13 +1,10 @@
-// Importamos Express para crear el servidor web
+// Importamos Express para crear el servidor web, Path para manejar rutas de archivos del sistema
 const express = require('express');
-// Importamos Path para manejar rutas de archivos del sistema
 const path = require('path');
-// Importamos las rutas del controlador de temas
 const topicRoutes = require('./controllers/topicController');
 
 // Creamos la instancia de la aplicación Express
 const app = express();
-// Definimos el puerto donde correrá el servidor
 const PORT = 3000;
 
 // CONFIGURACIÓN DE EJS: Establecemos EJS como motor de plantillas para renderizar vistas HTML dinámicas
